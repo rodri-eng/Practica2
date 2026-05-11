@@ -1,5 +1,7 @@
 package com.practica.practica2_pc3.controller;
 
+import com.practica.practica2_pc3.dto.LoginRequestDTO;
+import com.practica.practica2_pc3.dto.LoginResponseDTO;
 import com.practica.practica2_pc3.dto.UserRequestDTO;
 import com.practica.practica2_pc3.dto.UserResponseDTO;
 import com.practica.practica2_pc3.service.UserService;
@@ -25,6 +27,12 @@ public class UserController {
     public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO userRequestDTO){
         UserResponseDTO userResponseDTO = userService.createUser(userRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDTO);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> loginUser(@Valid @RequestBody LoginRequestDTO loginRequestDTO){
+        LoginResponseDTO logRespDto = userService.loginUser(loginRequestDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(logRespDto);
     }
 
 }

@@ -1,22 +1,22 @@
 package com.practica.practica2_pc3.service;
 
-import com.practica.practica2_pc3.repository.AccountRepository;
+import com.practica.practica2_pc3.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AccountService implements UserDetailsService {
-    private final AccountRepository accountRepository;
+public class CustomUserDetailService implements UserDetailsService {
 
-    public AccountService(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    private final UserRepository userRepository;
+    public CustomUserDetailService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return accountRepository
+        return userRepository
                 .findByEmail(username)
                 .orElseThrow();
     }

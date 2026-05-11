@@ -34,20 +34,16 @@ public class Reward {
     @Pattern(regexp="PENDING|DELIVERED|CANCELLED", message="Status no reconocido")
     private String status;
 
-    @Column(nullable = false)
-    private Integer totalPoints = 0;
-
     public Reward() {
     }
 
-    public Reward(Long id, User user, String rewardType, Integer pointsCost, ZonedDateTime redeemedAt, String status,  Integer totalPoints) {
+    public Reward(Long id, User user, String rewardType, Integer pointsCost, ZonedDateTime redeemedAt, String status) {
         this.id = id;
         this.user = user;
         this.rewardType = rewardType;
         this.pointsCost = pointsCost;
         this.redeemedAt = redeemedAt;
         this.status = status;
-        this.totalPoints = totalPoints;
     }
 
     public Long getId() {
@@ -98,11 +94,4 @@ public class Reward {
         this.status = status;
     }
 
-    public Integer getTotalPoints() {
-        return totalPoints;
-    }
-
-    public void setTotalPoints(Integer totalPoints) {
-        this.totalPoints = totalPoints;
-    }
 }

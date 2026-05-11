@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name="users")
@@ -36,15 +35,19 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String role = "ROLE_STUDENT";
 
+    @Column(nullable = false)
+    private Integer totalPoints = 0;
+
     public User() {
     }
 
-    public User(Long id, String username, String email, String password, String role) {
+    public User(Long id, String username, String email, String password, String role,  Integer totalPoints) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.totalPoints = totalPoints;
     }
 
     public Long getId() {
@@ -112,5 +115,11 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+    public Integer getTotalPoints() {
+        return totalPoints;
+    }
 
+    public void setTotalPoints(Integer totalPoints) {
+        this.totalPoints = totalPoints;
+    }
 }

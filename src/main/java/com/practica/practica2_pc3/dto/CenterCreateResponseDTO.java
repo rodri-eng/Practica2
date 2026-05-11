@@ -1,60 +1,49 @@
-package com.practica.practica2_pc3.model;
+package com.practica.practica2_pc3.dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 
-@Entity
-public class RecyclingCenter {
+public class CenterCreateResponseDTO {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @NotBlank
-    @Column(nullable = false)
     private String name;
 
     @NotBlank
-    @Column(nullable = false)
     private String location;
 
     @NotBlank
-    @Column(nullable = false)
     private String materialTypes;
 
     @NotBlank
-    @Pattern(regexp="ACTIVE|INACTIVE|FULL", message="El estatus ingresado no existe")
-    @Column(nullable = false)
-    private String status="ACTIVE";
-
-    @Min(0)
-    @Column(nullable = false)
     private Integer capacity;
 
-    @Min(0)
-    @Column(nullable = false)
-    private Integer currentLoad=0;
+    @NotBlank
+    private Integer currentLoad;
 
-    public RecyclingCenter() {
+    @NotBlank
+    private String status;
+
+    public CenterCreateResponseDTO() {
     }
 
-    public RecyclingCenter(Long id, String name, String location, String materialTypes, String status, Integer capacity, Integer currentLoad) {
+    public CenterCreateResponseDTO(String id, String name, String location, String materialTypes, Integer capacity, Integer currentLoad, String status) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.materialTypes = materialTypes;
-        this.status = status;
         this.capacity = capacity;
         this.currentLoad = currentLoad;
+        this.status = status;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -82,14 +71,6 @@ public class RecyclingCenter {
         this.materialTypes = materialTypes;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Integer getCapacity() {
         return capacity;
     }
@@ -104,5 +85,13 @@ public class RecyclingCenter {
 
     public void setCurrentLoad(Integer currentLoad) {
         this.currentLoad = currentLoad;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

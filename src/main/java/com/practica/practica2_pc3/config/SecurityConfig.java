@@ -1,7 +1,8 @@
 package com.practica.practica2_pc3.config;
 
 import com.practica.practica2_pc3.security.JwtAuthorizationFilter;
-import com.practica.practica2_pc3.service.AccountService;
+import com.practica.practica2_pc3.service.CustomUserDetailService;
+import com.practica.practica2_pc3.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,10 +26,10 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-    private final AccountService userDetailsService;
+    private final CustomUserDetailService userDetailsService;
     private final JwtAuthorizationFilter jwtFilter;
 
-    public SecurityConfig(AccountService userDetailsService, JwtAuthorizationFilter jwtFilter) {
+    public SecurityConfig(CustomUserDetailService userDetailsService, JwtAuthorizationFilter jwtFilter) {
         this.userDetailsService = userDetailsService;
         this.jwtFilter = jwtFilter;
     }
@@ -59,6 +60,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/centers").authenticated()
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
