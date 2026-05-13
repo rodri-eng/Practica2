@@ -13,7 +13,6 @@ public class CenterCreateRequestDTO {
     @NotBlank
     private String materialTypes;
 
-    @NotBlank
     private Integer capacity;
 
     public CenterCreateRequestDTO() {

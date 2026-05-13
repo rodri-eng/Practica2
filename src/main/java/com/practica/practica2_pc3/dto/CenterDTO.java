@@ -1,47 +1,36 @@
 package com.practica.practica2_pc3.dto;
 
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
+public class CenterDTO {
 
-public class CenterCreateResponseDTO {
+    private Long id;
 
-    @Id
-    private String id;
-
-    @NotBlank
     private String name;
 
-    @NotBlank
     private String location;
 
-    @NotBlank
     private String materialTypes;
 
-    private Integer capacity;
+    private Integer availableCapacity;
 
-    private Integer currentLoad;
-
-    @NotBlank
     private String status;
 
-    public CenterCreateResponseDTO() {
+    public CenterDTO() {
     }
 
-    public CenterCreateResponseDTO(String id, String name, String location, String materialTypes, Integer capacity, Integer currentLoad, String status) {
+    public CenterDTO(Long id, String name, String location, String materialTypes, Integer availableCapacity, String status) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.materialTypes = materialTypes;
-        this.capacity = capacity;
-        this.currentLoad = currentLoad;
+        this.availableCapacity = availableCapacity;
         this.status = status;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -69,20 +58,12 @@ public class CenterCreateResponseDTO {
         this.materialTypes = materialTypes;
     }
 
-    public Integer getCapacity() {
-        return capacity;
+    public Integer getAvailableCapacity() {
+        return availableCapacity;
     }
 
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
-    }
-
-    public Integer getCurrentLoad() {
-        return currentLoad;
-    }
-
-    public void setCurrentLoad(Integer currentLoad) {
-        this.currentLoad = currentLoad;
+    public void setAvailableCapacity(Integer availableCapacity) {
+        this.availableCapacity = availableCapacity;
     }
 
     public String getStatus() {

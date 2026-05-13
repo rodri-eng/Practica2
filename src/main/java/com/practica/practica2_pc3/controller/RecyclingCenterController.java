@@ -2,14 +2,16 @@ package com.practica.practica2_pc3.controller;
 
 import com.practica.practica2_pc3.dto.CenterCreateRequestDTO;
 import com.practica.practica2_pc3.dto.CenterCreateResponseDTO;
+import com.practica.practica2_pc3.dto.CenterDTO;
+import com.practica.practica2_pc3.dto.ListCenterResponseDTO;
 import com.practica.practica2_pc3.service.RecyclingCenterService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/centers")
@@ -25,5 +27,12 @@ public class RecyclingCenterController {
     public ResponseEntity<CenterCreateResponseDTO> createCenter(@Valid @RequestBody CenterCreateRequestDTO centerCreateRequestDTO) {
         CenterCreateResponseDTO ccrDTO = centerService.createRecyclingCenter(centerCreateRequestDTO);
         return ResponseEntity.status(HttpStatus.OK).body(ccrDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<ListCenterResponseDTO<CenterDTO>> getCenters(@PageableDefault(size = 10)Pageable pageable){
+        Page<CenterDTO> listCenters = centerService.getAllCenters(pageable);
+        ListCenterResponseDTO<CenterDTO> listCentersDTO = new ListCenterResponseDTO<>(listCenters);
+        return ResponseEntity.status(HttpStatus.OK).body(listCentersDTO);
     }
 }
