@@ -13,16 +13,16 @@ public class CenterCreateRequestDTO {
     @NotBlank
     private String materialTypes;
 
-    private Integer capacity;
+    private Integer availableCapacity;
 
     public CenterCreateRequestDTO() {
     }
 
-    public CenterCreateRequestDTO(String name, String location, String materialTypes, Integer capacity) {
+    public CenterCreateRequestDTO(String name, String location, String materialTypes, Integer availableCapacity) {
         this.name = name;
         this.location = location;
         this.materialTypes = materialTypes;
-        this.capacity = capacity;
+        this.availableCapacity = availableCapacity;
     }
 
     public String getName() {
@@ -49,11 +49,11 @@ public class CenterCreateRequestDTO {
         this.materialTypes = materialTypes;
     }
 
-    public Integer getCapacity() {
-        return capacity;
+    public Integer getAvailableCapacity() {
+        return availableCapacity;
     }
 
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
+    public void setAvailableCapacity(Integer availableCapacity) {
+        this.availableCapacity = availableCapacity;
     }
 }

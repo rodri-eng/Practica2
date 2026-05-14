@@ -30,8 +30,8 @@ public class RecyclingCenterController {
     }
 
     @GetMapping
-    public ResponseEntity<ListCenterResponseDTO<CenterDTO>> getCenters(@PageableDefault(size = 10)Pageable pageable){
-        Page<CenterDTO> listCenters = centerService.getAllCenters(pageable);
+    public ResponseEntity<ListCenterResponseDTO<CenterDTO>> getCenters(@PageableDefault(size = 10, page=0)Pageable pageable,@RequestParam(required = false) String status){
+        Page<CenterDTO> listCenters = centerService.getAllCenters(pageable, status);
         ListCenterResponseDTO<CenterDTO> listCentersDTO = new ListCenterResponseDTO<>(listCenters);
         return ResponseEntity.status(HttpStatus.OK).body(listCentersDTO);
     }

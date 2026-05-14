@@ -17,7 +17,7 @@ public class CenterCreateResponseDTO {
     @NotBlank
     private String materialTypes;
 
-    private Integer capacity;
+    private Integer availableCapacity;
 
     private Integer currentLoad;
 
@@ -27,12 +27,12 @@ public class CenterCreateResponseDTO {
     public CenterCreateResponseDTO() {
     }
 
-    public CenterCreateResponseDTO(String id, String name, String location, String materialTypes, Integer capacity, Integer currentLoad, String status) {
+    public CenterCreateResponseDTO(String id, String name, String location, String materialTypes, Integer availableCapacity, Integer currentLoad, String status) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.materialTypes = materialTypes;
-        this.capacity = capacity;
+        this.availableCapacity = availableCapacity;
         this.currentLoad = currentLoad;
         this.status = status;
     }
@@ -69,12 +69,12 @@ public class CenterCreateResponseDTO {
         this.materialTypes = materialTypes;
     }
 
-    public Integer getCapacity() {
-        return capacity;
+    public Integer getAvailableCapacity() {
+        return availableCapacity;
     }
 
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
+    public void setAvailableCapacity(Integer availableCapacity) {
+        this.availableCapacity = availableCapacity;
     }
 
     public Integer getCurrentLoad() {

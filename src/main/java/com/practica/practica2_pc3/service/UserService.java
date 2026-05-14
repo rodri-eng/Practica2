@@ -1,5 +1,6 @@
 package com.practica.practica2_pc3.service;
 
+import com.practica.practica2_pc3.config.CustomUserDetails;
 import com.practica.practica2_pc3.dto.LoginRequestDTO;
 import com.practica.practica2_pc3.dto.LoginResponseDTO;
 import com.practica.practica2_pc3.dto.UserRequestDTO;
@@ -11,8 +12,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -43,8 +42,7 @@ public class UserService {
             throw new RuntimeException("La contrasenia es incorrecta");
         }
 
-        String token = jwtService.generateToken(user);
-
+        String token = jwtService.generateToken(new CustomUserDetails(user));
         LoginResponseDTO logRespDTO = new LoginResponseDTO();
         logRespDTO.setToken(token);
         logRespDTO.setExpiresIn(jwtService.getAccessTokenExpiration());

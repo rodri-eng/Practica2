@@ -25,11 +25,23 @@ public class RecyclingCenterService {
     public CenterCreateResponseDTO createRecyclingCenter(CenterCreateRequestDTO centerCreateRequestDTO) {
         RecyclingCenter rc = modelMapper.map(centerCreateRequestDTO, RecyclingCenter.class);
         recyclingCenterRepository.save(rc);
-        return modelMapper.map(rc, CenterCreateResponseDTO.class);
+        CenterCreateResponseDTO rcResp = modelMapper.map(rc, CenterCreateResponseDTO.class);
+        rcResp.setAvailableCapacity(rc.getCapacity());
+        return rcResp;
     }
 
-    public Page<CenterDTO> getAllCenters(Pageable pageable) {
-        Page<RecyclingCenter> listCenterResponseDTO = recyclingCenterRepository.findAll(pageable);
-        return listCenterResponseDTO.map(center -> modelMapper.map(center, CenterDTO.class));
+    public Page<CenterDTO> getAllCenters(Pageable pageable, String status) {
+        Page<RecyclingCenter> centers;
+        String statusParam = status.toUpperCase();
+
+        if(statusParam == null){
+            centers = recyclingCenterRepository.findAllByStatus(pageable, "ACTIVE");
+        }else if(status.toUpperCase() == "ALL" || status == null){
+            centers = recyclingCenterRepository.findAll(pageable);
+        }else{
+            centers = recyclingCenterRepository.findAllByStatus(pageable, statusParam);
+        }
+
+        return centers.map(center -> modelMapper.map(center, CenterDTO.class));
     }
 }

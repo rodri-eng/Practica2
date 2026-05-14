@@ -1,6 +1,7 @@
 package com.practica.practica2_pc3.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
@@ -28,7 +29,6 @@ public class Contribution {
     @Column(nullable = false)
     private String materialType;
 
-    @NotBlank
     @Positive
     @Column(nullable = false)
     private Double weight;
@@ -37,7 +37,7 @@ public class Contribution {
     @Column(nullable = false)
     private ZonedDateTime contributedAt;
 
-    @NotBlank
+    @Min(0)
     private Integer pointsEarned;
 
     @NotBlank
