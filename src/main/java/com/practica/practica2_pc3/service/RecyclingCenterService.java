@@ -24,6 +24,7 @@ public class RecyclingCenterService {
 
     public CenterCreateResponseDTO createRecyclingCenter(CenterCreateRequestDTO centerCreateRequestDTO) {
         RecyclingCenter rc = modelMapper.map(centerCreateRequestDTO, RecyclingCenter.class);
+        rc.setCapacity(centerCreateRequestDTO.getAvailableCapacity());
         recyclingCenterRepository.save(rc);
         CenterCreateResponseDTO rcResp = modelMapper.map(rc, CenterCreateResponseDTO.class);
         rcResp.setAvailableCapacity(rc.getCapacity());

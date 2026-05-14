@@ -1,10 +1,7 @@
 package com.practica.practica2_pc3.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 
 import java.time.ZonedDateTime;
 
@@ -15,12 +12,12 @@ public class Contribution {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull
     @ManyToOne
     @JoinColumn(name="user_id",  nullable=false)
     private User user;
 
-    @NotBlank
+    @NotNull
     @ManyToOne
     @JoinColumn(name="recyclingCenter_id",   nullable=false)
     private RecyclingCenter recyclingCenter;
@@ -33,12 +30,12 @@ public class Contribution {
     @Column(nullable = false)
     private Double weight;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private ZonedDateTime contributedAt;
 
     @Min(0)
-    private Integer pointsEarned;
+    private Double pointsEarned;
 
     @NotBlank
     @Pattern(regexp="PENDING|VERIFIED|REJECTED", message="El estatus ingresado no existe")
@@ -47,7 +44,7 @@ public class Contribution {
     public Contribution() {
     }
 
-    public Contribution(Long id, User user, RecyclingCenter recyclingCenter, String materialType, Double weight, ZonedDateTime contributedAt, Integer pointsEarned, String status) {
+    public Contribution(Long id, User user, RecyclingCenter recyclingCenter, String materialType, Double weight, ZonedDateTime contributedAt, Double pointsEarned, String status) {
         this.id = id;
         this.user = user;
         this.recyclingCenter = recyclingCenter;
@@ -106,11 +103,11 @@ public class Contribution {
         this.contributedAt = contributedAt;
     }
 
-    public Integer getPointsEarned() {
+    public Double getPointsEarned() {
         return pointsEarned;
     }
 
-    public void setPointsEarned(Integer pointsEarned) {
+    public void setPointsEarned(Double pointsEarned) {
         this.pointsEarned = pointsEarned;
     }
 

@@ -37,12 +37,17 @@ public class ContributionService {
         RecyclingCenter rc = recyclingCenterRepository.findById(contributionDTO.getCenterId())
                 .orElseThrow(() -> new ResourceNotFoundException("RecyclingCenter no encontrado"));
 
-        Contribution contribution =  modelMapper.map(contributionDTO, Contribution.class);
+        Contribution contribution =  new Contribution();
+        contribution.setMaterialType(contributionDTO.getMaterialType());
+        contribution.setWeight(contributionDTO.getWeight());
         contribution.setUser(user);
         contribution.setRecyclingCenter(rc);
         contribution.setContributedAt(ZonedDateTime.now());
-        contribution.setPointsEarned(25);
         contribution.setStatus("PENDING");
+
+        int totalPoints = getTotalPoints(contributionDTO);
+        contribution.setPointsEarned(totalPoints * contribution.getWeight());
+
         contributionRepository.save(contribution);
 
         ResponseContributionDTO respContDTP = modelMapper.map(contribution, ResponseContributionDTO.class);
@@ -51,5 +56,24 @@ public class ContributionService {
         respContDTP.setCenterName(contribution.getRecyclingCenter().getName());
 
         return respContDTP;
+    }
+
+    private static int getTotalPoints(RequestContributionDTO contributionDTO) {
+        String[] materiales =  contributionDTO.getMaterialType().split("\\|");
+        int totalPoints = 0;
+        for (String material : materiales){
+            if (material == "PLASTIC"){
+                totalPoints += 10;
+            }else if(material == "PAPER"){
+                totalPoints += 5;
+            }else if(material == "GLASS"){
+                totalPoints += 8;
+            }else if (material == "METAL"){
+                totalPoints += 15;
+            }else if( material == "ELECTRONIC"){
+                totalPoints += 20;
+            }
+        }
+        return totalPoints;
     }
 }

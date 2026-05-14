@@ -16,7 +16,7 @@ public class ResponseContributionDTO {
 
     private Double weight;
 
-    private Integer pointsEarned;
+    private Double pointsEarned;
 
     private ZonedDateTime contributedAt;
 
@@ -25,7 +25,7 @@ public class ResponseContributionDTO {
     public ResponseContributionDTO() {
     }
 
-    public ResponseContributionDTO(Long id, Long userId, Long centerId, String centerName, String materialType, Double weight, Integer pointsEarned, ZonedDateTime contributedAt, String status) {
+    public ResponseContributionDTO(Long id, Long userId, Long centerId, String centerName, String materialType, Double weight, Double pointsEarned, ZonedDateTime contributedAt, String status) {
         this.id = id;
         this.userId = userId;
         this.centerId = centerId;
@@ -85,11 +85,11 @@ public class ResponseContributionDTO {
         this.weight = weight;
     }
 
-    public Integer getPointsEarned() {
+    public Double getPointsEarned() {
         return pointsEarned;
     }
 
-    public void setPointsEarned(Integer pointsEarned) {
+    public void setPointsEarned(Double pointsEarned) {
         this.pointsEarned = pointsEarned;
     }
 
