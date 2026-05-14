@@ -43,6 +43,10 @@ public class RecyclingCenterService {
             centers = recyclingCenterRepository.findAllByStatus(pageable, statusParam);
         }
 
-        return centers.map(center -> modelMapper.map(center, CenterDTO.class));
+        return centers.map(center -> {
+            CenterDTO dto = modelMapper.map(center, CenterDTO.class);
+            dto.setAvailableCapacity(center.getCapacity());
+            return dto;
+        });
     }
 }

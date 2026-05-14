@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
 @Service
 public class ContributionService {
@@ -62,15 +63,18 @@ public class ContributionService {
         String[] materiales =  contributionDTO.getMaterialType().split("\\|");
         int totalPoints = 0;
         for (String material : materiales){
-            if (material == "PLASTIC"){
+
+            String materialLimpio = material.trim().toUpperCase();
+
+            if (materialLimpio.equals("PLASTIC")){
                 totalPoints += 10;
-            }else if(material == "PAPER"){
+            }else if(materialLimpio.equals("PAPER")){
                 totalPoints += 5;
-            }else if(material == "GLASS"){
+            }else if(materialLimpio.equals("GLASS")){
                 totalPoints += 8;
-            }else if (material == "METAL"){
+            }else if (materialLimpio.equals("METAL")){
                 totalPoints += 15;
-            }else if( material == "ELECTRONIC"){
+            }else if(materialLimpio.equals("ELECTRONIC")){
                 totalPoints += 20;
             }
         }

@@ -1,5 +1,6 @@
 package com.practica.practica2_pc3.security;
 
+import com.practica.practica2_pc3.config.CustomUserDetails;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -26,11 +27,18 @@ public class JwtService {
 
     public String generateToken(UserDetails userDetails) {
         Date now = new Date();
+
+        Long userId = null;
+        if (userDetails instanceof CustomUserDetails) {
+            userId = ((CustomUserDetails) userDetails).getId();
+        }
+
         return Jwts.builder()
                 .subject(userDetails.getUsername())
                 .claim("roles",
                         userDetails.getAuthorities().stream()
                                 .map(GrantedAuthority::getAuthority).toList())
+                .claim("userId", userId)
                 .issuedAt(now)
                 .expiration(new Date(now.getTime() + accessTokenExpiration))
                 .signWith(getSigningKey())
@@ -58,6 +66,16 @@ public class JwtService {
                 .parseSignedClaims(token)
                 .getPayload()
                 .getSubject();
+
+    }
+
+    public Long extractUserId(String token) {
+        return Jwts.parser()
+                .verifyWith((SecretKey) getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("userId", Long.class);
     }
 
     public Long getAccessTokenExpiration() {

@@ -1,50 +1,37 @@
-package com.practica.practica2_pc3.model;
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
+package com.practica.practica2_pc3.dto;
 
 import java.time.ZonedDateTime;
 
-@Entity
-public class Reward {
+public class ResponseRewardDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name="user_id", nullable = false)
-    private User user;
+    private Long userId;
 
-    @NotBlank
-    @Pattern(regexp = "COFFEE|SNACK|BOOK|MERCHANDISE", message="Tipo de recompensa no reconocida")
     private String rewardType;
 
-    @NotNull
-    @Positive
     private Integer pointsCost;
 
-    @NotNull
+    private Double remainingPoints;
+
     private ZonedDateTime redeemedAt;
 
-    @NotBlank
-    @Pattern(regexp="PENDING|DELIVERED|CANCELLED", message="Status no reconocido")
     private String status;
 
-    public Reward() {
+    private String code;
+
+    public ResponseRewardDTO() {
     }
 
-    public Reward(Long id, User user, String rewardType, Integer pointsCost, ZonedDateTime redeemedAt, String status) {
+    public ResponseRewardDTO(Long id, Long userId, String rewardType, Integer pointsCost, Double remainingPoints, ZonedDateTime redeemedAt, String status, String code) {
         this.id = id;
-        this.user = user;
+        this.userId = userId;
         this.rewardType = rewardType;
         this.pointsCost = pointsCost;
+        this.remainingPoints = remainingPoints;
         this.redeemedAt = redeemedAt;
         this.status = status;
+        this.code = code;
     }
 
     public Long getId() {
@@ -55,12 +42,12 @@ public class Reward {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getRewardType() {
@@ -79,6 +66,14 @@ public class Reward {
         this.pointsCost = pointsCost;
     }
 
+    public Double getRemainingPoints() {
+        return remainingPoints;
+    }
+
+    public void setRemainingPoints(Double remainingPoints) {
+        this.remainingPoints = remainingPoints;
+    }
+
     public ZonedDateTime getRedeemedAt() {
         return redeemedAt;
     }
@@ -95,4 +90,11 @@ public class Reward {
         this.status = status;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }
