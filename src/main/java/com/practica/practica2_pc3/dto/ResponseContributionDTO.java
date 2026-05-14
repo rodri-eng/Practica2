@@ -8,7 +8,7 @@ public class ResponseContributionDTO {
 
     private Long userId;
 
-    private Long centerID;
+    private Long centerId;
 
     private String centerName;
 
@@ -22,10 +22,13 @@ public class ResponseContributionDTO {
 
     private String status;
 
-    public ResponseContributionDTO(Long id, Long userId, Long centerID, String centerName, String materialType, Double weight, Integer pointsEarned, ZonedDateTime contributedAt, String status) {
+    public ResponseContributionDTO() {
+    }
+
+    public ResponseContributionDTO(Long id, Long userId, Long centerId, String centerName, String materialType, Double weight, Integer pointsEarned, ZonedDateTime contributedAt, String status) {
         this.id = id;
         this.userId = userId;
-        this.centerID = centerID;
+        this.centerId = centerId;
         this.centerName = centerName;
         this.materialType = materialType;
         this.weight = weight;
@@ -50,12 +53,12 @@ public class ResponseContributionDTO {
         this.userId = userId;
     }
 
-    public Long getCenterID() {
-        return centerID;
+    public Long getCenterId() {
+        return centerId;
     }
 
-    public void setCenterID(Long centerID) {
-        this.centerID = centerID;
+    public void setCenterId(Long centerId) {
+        this.centerId = centerId;
     }
 
     public String getCenterName() {

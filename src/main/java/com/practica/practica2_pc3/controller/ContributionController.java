@@ -3,9 +3,11 @@ package com.practica.practica2_pc3.controller;
 import com.practica.practica2_pc3.dto.RequestContributionDTO;
 import com.practica.practica2_pc3.dto.ResponseContributionDTO;
 import com.practica.practica2_pc3.service.ContributionService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +23,7 @@ public class ContributionController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseContributionDTO> registerContribution(RequestContributionDTO contributionDTO, Principal principal){
+    public ResponseEntity<ResponseContributionDTO> registerContribution(@Valid @RequestBody RequestContributionDTO contributionDTO, Principal principal){
         ResponseContributionDTO respContribution = contributionService.registerContribution(contributionDTO,principal.getName());
         return ResponseEntity.status(HttpStatus.CREATED).body(respContribution);
     }

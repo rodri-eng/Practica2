@@ -34,7 +34,7 @@ public class ContributionService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no econtrado"));
 
-        RecyclingCenter rc = recyclingCenterRepository.findById(contributionDTO.getCenterID())
+        RecyclingCenter rc = recyclingCenterRepository.findById(contributionDTO.getCenterId())
                 .orElseThrow(() -> new ResourceNotFoundException("RecyclingCenter no encontrado"));
 
         Contribution contribution =  modelMapper.map(contributionDTO, Contribution.class);
@@ -47,7 +47,7 @@ public class ContributionService {
 
         ResponseContributionDTO respContDTP = modelMapper.map(contribution, ResponseContributionDTO.class);
         respContDTP.setUserId(contribution.getUser().getId());
-        respContDTP.setCenterID(contribution.getRecyclingCenter().getId());
+        respContDTP.setCenterId(contribution.getRecyclingCenter().getId());
         respContDTP.setCenterName(contribution.getRecyclingCenter().getName());
 
         return respContDTP;

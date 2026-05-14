@@ -2,24 +2,27 @@ package com.practica.practica2_pc3.dto;
 
 public class RequestContributionDTO {
 
-    private Long centerID;
+    private Long centerId;
 
     private String materialType;
 
     private Double weight;
 
+    public RequestContributionDTO() {
+    }
+
     public RequestContributionDTO(Long centerID, String materialType, Double weight) {
-        this.centerID = centerID;
+        this.centerId = centerId;
         this.materialType = materialType;
         this.weight = weight;
     }
 
-    public Long getCenterID() {
-        return centerID;
+    public Long getCenterId() {
+        return centerId;
     }
 
-    public void setCenterID(Long centerID) {
-        this.centerID = centerID;
+    public void setCenterId(Long centerID) {
+        this.centerId = centerID;
     }
 
     public String getMaterialType() {
